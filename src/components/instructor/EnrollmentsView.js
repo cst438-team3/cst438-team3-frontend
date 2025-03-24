@@ -41,7 +41,15 @@ const EnrollmentsView = (props) => {
 
  
     const onSave = (enrollment) => {
-        saveGrade(enrollment);
+        //check for valid letter grade
+       const validGrades = ['A', 'B', 'C', 'D', 'F'];
+
+       if(!validGrades.includes(enrollment.grade)){ 
+            setMessage("Invalid grade entered. Only letter grades allowed.")
+            return;
+       }
+            setMessage("");
+            saveGrade(enrollment);
     }
 
      
@@ -68,7 +76,7 @@ const EnrollmentsView = (props) => {
 
     //updates grade in local state upon input field change
     const onGradeChange = (e, enrollmentId) => {
-        const newGrade = e.target.value;
+        const newGrade = e.target.value.toUpperCase();
 
         setEnrollments(prevEnrollments => 
             prevEnrollments.map(enrollment => {
