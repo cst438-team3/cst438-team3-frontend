@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useLocation } from "react-router-dom";
 import {SERVER_URL} from '../../Constants';
+import "../../App.css";
 
 // instructor views a list of sections they are teaching 
 // use the URL /sections?email=dwisneski@csumb.edu&year= &semester=
@@ -21,7 +22,7 @@ const InstructorSectionsView = (props) => {
     const [message, setMessage] = useState('');
 
     const location = useLocation();
-    const { year, semester } = location.state || { year: '', semester: ''};
+    const { year, semester } = location.state;
 
     const fetchSections = async () => {
         try{
@@ -49,15 +50,13 @@ const InstructorSectionsView = (props) => {
         <div> 
 
             <h3> Sections</h3>
-
-            
            
            { sections.length > 0 && 
                 <>
 
                     <h3>{year} {semester} </h3>
 
-                    <table>
+                    <table className="Center">
                         <thead>
                         <tr>
                             {headers.map((s, idx) => (<th key={idx}>{s}</th>))}
