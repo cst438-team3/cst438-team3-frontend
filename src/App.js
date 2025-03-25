@@ -67,6 +67,7 @@ function App() {
               <Route path="assignments" element={<AssignmentsView />} />
               <Route path="enrollments" element={<EnrollmentsView />} />
               <Route path="sections" element={<InstructorSectionsView />} />
+              <Route path="/assignments/:assignmentId/grades" element={<AssignmentGrade />} />
             </Route>
           </Routes>
         </BrowserRouter>
