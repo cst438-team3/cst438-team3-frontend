@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import "../../App.css";
+import {SERVER_URL} from '../../Constants';
+import { Button } from '@mui/material';
 
 // instructor enters students' grades for an assignment
 // fetch the grades using the URL /assignments/{id}/grades
@@ -10,10 +14,96 @@ import React, { useState } from 'react';
 
 const AssignmentGrade = (props) => {
 
+    const location = useLocation(); 
+    const {assignmentId} = location.state;
+
+    const [message, setMessage] = useState('');
+    const [grades, setGrades] = useState([]);
+
+    const headers = ['gradeId', 'student name', 'student email', 'score', ''];
+
+    const fetchGrades = async () => {
+        try{
+            const response = await fetch(`${SERVER_URL}/assignments/${assignmentId}/grades`)
+
+            if(response.ok){
+                const data = await response.json();
+                console.log("Fetched grades:", data);
+                setGrades(data);
+            } else {
+                const rc = await response.json();
+                setMessage(rc.message);
+            }
+        }catch(err){
+            setMessage("network error: " + err);
+        }
+    }
+
+    const onSave = (grade) => {
+        saveScore(grade);
+    }
+
+    const saveScore = async (grade) => {
+        try{
+            const response = await fetch (`${SERVER_URL}/grades`,
+                {
+                    method: 'PUT', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify([grade])
+                }); 
+                if(response.ok){
+                    setMessage("score saved");
+                } else {
+                    const rc = await response.json();
+                    setMessage(rc.message);
+                }
+        }catch(err){
+            setMessage("network error: " + err)
+        }
+    }
+
+    const onScoreChange = (e, gradeId) => {
+        const newScore = e.target.value;
+        setGrades(prevGrades =>
+            prevGrades.map(g =>
+                g.gradeId === gradeId ? { ...g, score: newScore } : g
+            )
+        );
+    };
+
+    useEffect(() => {
+                fetchGrades();
+            }, [assignmentId]);
  
     return(
         <>
-            <h3>Not implemented</h3>
+            <h3>Assignment Grades</h3>
+
+            { grades.length > 0 &&
+                <>
+                    <h3> {message} </h3>
+                    <table className="Center">
+                        <thead>
+                        <tr>
+                            {headers.map((g, idx) => (<th key={idx}>{g}</th>))}
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {grades.map((g) => (
+                                <tr key={g.gradeId}>
+                                    <td>{g.gradeId}</td>
+                                    <td>{g.studentEmail}</td>
+                                    <td>{g.studentName}</td>
+                                    <td><input type="text" name="score" value={g.score} onChange={(e) => onScoreChange(e, g.gradeId)}></input></td>
+                                    <td><Button onClick={() => onSave(g)}>Save</Button></td>
+                                </tr>
+                            ) )}
+                        </tbody>
+                    </table>
+                </>
+            }
         </>          
     );
 }
