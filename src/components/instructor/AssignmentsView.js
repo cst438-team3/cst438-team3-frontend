@@ -118,7 +118,7 @@ const AssignmentsView = (props) => {
                             <AssignmentUpdate assignment={a} save={saveAssignment} onClose={fetchAssignments} />
                         </td>
                         <td>
-                            <Button onClick={() => onDelete(a.id)}>Delete</Button>
+                            <Button id="delete" onClick={() => onDelete(a.id)}>Delete</Button>
                         </td>
                     </tr>
                 ))}
