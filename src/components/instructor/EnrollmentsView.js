@@ -115,7 +115,13 @@ const EnrollmentsView = (props) => {
                                     <td>{e.studentId}</td>
                                     <td>{e.name}</td>
                                     <td>{e.email}</td>
-                                    <td><input id="grade" type="text" name="grade" value={e.grade} onChange={(event) => onGradeChange(event, e.enrollmentId)}/></td>
+                                    <td><input
+                                        id="grade"
+                                        type="text"
+                                        name="grade"
+                                        value={e.grade || ''} 
+                                        onChange={(event) => onGradeChange(event, e.enrollmentId)}
+                                        /></td>
                                     <td><Button id="save" onClick={() => onSave(e)}>Save</Button></td>
                                 </tr>
                             ))}

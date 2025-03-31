@@ -28,7 +28,11 @@ const AssignmentGrade = (props) => {
 
             if(response.ok){
                 const data = await response.json();
-                console.log("Fetched grades:", data);
+                //if grade doesn't have a score, set to empty string
+                const formattedData = data.map(grade => ({
+                    ...grade, 
+                    score: grade.score !== undefined ? grade.score : ''
+                }));
                 setGrades(data);
             } else {
                 const rc = await response.json();
