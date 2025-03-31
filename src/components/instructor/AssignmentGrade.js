@@ -83,7 +83,7 @@ const AssignmentGrade = (props) => {
 
             { grades.length > 0 &&
                 <>
-                    <h3> {message} </h3>
+                    <h3 id="message"> {message} </h3>
                     <table className="Center">
                         <thead>
                         <tr>
@@ -96,8 +96,8 @@ const AssignmentGrade = (props) => {
                                     <td>{g.gradeId}</td>
                                     <td>{g.studentEmail}</td>
                                     <td>{g.studentName}</td>
-                                    <td><input type="text" name="score" value={g.score} onChange={(e) => onScoreChange(e, g.gradeId)}></input></td>
-                                    <td><Button onClick={() => onSave(g)}>Save</Button></td>
+                                    <td><input id="score" type="text" name="score" value={g.score} onChange={(e) => onScoreChange(e, g.gradeId)}></input></td>
+                                    <td><Button id="save" onClick={() => onSave(g)}>Save</Button></td>
                                 </tr>
                             ) )}
                         </tbody>
