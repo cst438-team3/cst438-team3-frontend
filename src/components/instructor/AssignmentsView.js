@@ -110,7 +110,7 @@ const AssignmentsView = (props) => {
                         <td>{a.title}</td>
                         <td>{a.dueDate}</td>
                         <td>
-                            <Link to={`/assignments/${a.id}/grades`} state={{ assignmentId: a.id }}>
+                            <Link id="grade" to={`/assignments/${a.id}/grades`} state={{ assignmentId: a.id }}>
                                 Grade
                             </Link>
                         </td>

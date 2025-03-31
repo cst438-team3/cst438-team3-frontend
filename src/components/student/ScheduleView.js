@@ -94,12 +94,12 @@ const ScheduleView = () => {
                 <tbody>
                     {enrollments.map((e) => (
                         <tr key={e.enrollmentId}>
-                            <td style={styles.td}>{e.title}</td>
-                            <td style={styles.td}>{e.sectionNo}</td>
+                            <td id="title" style={styles.td}>{e.title}</td>
+                            <td id="secNo" style={styles.td}>{e.sectionNo}</td>
                             <td style={styles.td}>{e.times}</td>
                             <td style={styles.td}>{e.building} {e.room}</td>
                             <td style={styles.td}>
-                                <button style={styles.button} onClick={() => dropEnrollment(e.enrollmentId)}>Drop</button>
+                                <button id="drop" style={styles.button} onClick={() => dropEnrollment(e.enrollmentId)}>Drop</button>
                             </td>
                         </tr>
                     ))}

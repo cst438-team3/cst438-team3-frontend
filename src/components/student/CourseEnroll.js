@@ -51,7 +51,7 @@ const CourseEnroll = () => {
     return(
         <div style={styles.container}>
             <h3 style={styles.heading}>Enroll in a Section</h3>
-            {message && <p style={styles.message}>{message}</p>}
+            {message && <p id="message" style={styles.message}>{message}</p>}
             <table style={styles.table}>
                 <thead>
                     <tr>
@@ -65,12 +65,12 @@ const CourseEnroll = () => {
                 <tbody>
                     {sections.map((section) => (
                         <tr key={section.secNo}>
-                            <td style={styles.td}>{section.secNo}</td>
-                            <td style={styles.td}>{section.title}</td>
+                            <td id="secNo" style={styles.td}>{section.secNo}</td>
+                            <td id="title" style={styles.td}>{section.title}</td>
                             <td style={styles.td}>{section.times}</td>
                             <td style={styles.td}>{section.instructorName}</td>
                             <td style={styles.td}>
-                                <button style={styles.button} onClick={() => enrollInSection(section.secNo)}>Enroll</button>
+                                <button id="enroll" style={styles.button} onClick={() => enrollInSection(section.secNo)}>Enroll</button>
                             </td>
                         </tr>
                     ))}
