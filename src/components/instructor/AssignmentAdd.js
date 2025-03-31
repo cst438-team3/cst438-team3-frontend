@@ -52,7 +52,7 @@ const AssignmentAdd = (props)  => {
 
   return (
     <>
-      <Button onClick={editOpen}>Add Assignment</Button>
+      <Button id="addAssignment" onClick={editOpen}>Add Assignment</Button>
       <Dialog open={open}>
         <DialogTitle>Add Assignment</DialogTitle>
         <DialogContent style={{ paddingTop: 20 }}>
@@ -63,6 +63,7 @@ const AssignmentAdd = (props)  => {
             fullWidth
             label="Title"
             name="title"
+            id="title"
             value={assignment.title}
             onChange={editChange}
           />
@@ -71,13 +72,14 @@ const AssignmentAdd = (props)  => {
             fullWidth
             label="Due Date"
             name="dueDate"
+            id="dueDate"
             value={assignment.dueDate}
             onChange={editChange}
           />
         </DialogContent>
         <DialogActions>
           <Button color="secondary" onClick={editClose}>Close</Button>
-          <Button color="primary" onClick={onSave}>Save</Button>
+          <Button id="save" color="primary" onClick={onSave}>Save</Button>
         </DialogActions>
       </Dialog>
     </>
