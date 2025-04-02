@@ -12,15 +12,23 @@ import { SERVER_URL } from '../../Constants';
 const ScheduleView = () => {
     const [enrollments, setEnrollments] = useState([]);
     const [message, setMessage] = useState('');
+    const [year, setYear] = useState('');
+    const [semester, setSemester] = useState('');
 
     const fetchSchedule = async () => {
+        if (!year || !semester) {
+            setMessage('');
+            return;
+        }
         try {
-            const response = await fetch(`${SERVER_URL}/enrollments?studentId=3&year=2024&semester=Fall`);
+            const response = await fetch(`${SERVER_URL}/enrollments?studentId=3&year=${year}&semester=${semester}`);
             if (response.ok) {
                 const data = await response.json();
                 setEnrollments(data);
+                setMessage('');
             } else {
                 setMessage('Failed to load schedule');
+                setEnrollments([]);
             }
         } catch (error) {
             setMessage('Network error: ' + error.message);
@@ -53,6 +61,25 @@ const ScheduleView = () => {
     return(
         <div style={styles.container}>
             <h3 style={styles.heading}>My Class Schedule</h3>
+            <div style={styles.filters}>
+                <label>
+                    Year:
+                    <select id="year" value={year} onChange={(e) => setYear(e.target.value)} style={styles.select}>
+                        <option value="">-- Select Year --</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                    </select>
+                </label>
+                <label>
+                    Semester:
+                    <select id="semester" value={semester} onChange={(e) => setSemester(e.target.value)} style={styles.select}>
+                        <option value="">-- Select Semester --</option>
+                        <option value="Fall">Fall</option>
+                        <option value="Spring">Spring</option>
+                    </select>
+                </label>
+                <button id="load" onClick={fetchSchedule} style={styles.button}>Load Schedule</button>
+            </div>
             {message && <p style={styles.message}>{message}</p>}
             <table style={styles.table}>
                 <thead>
@@ -116,6 +143,14 @@ const styles = {
         border: 'none',
         cursor: 'pointer',
         borderRadius: '4px',
+    },
+    filters: {
+        marginBottom: '20px',
+    },
+    select: {
+        marginLeft: '8px',
+        marginRight: '15px',
+        padding: '6px',
     },
 };
 
