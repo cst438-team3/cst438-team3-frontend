@@ -12,21 +12,20 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { SERVER_URL } from '../../Constants';
 
-const AssignmentAdd = (props)  => {
-  const section = props.section || { secNo: '', courseId: '', secId: '' };
+const AssignmentAdd = (props)  => {  
   const [open, setOpen] = useState(false);
   const [editMessage, setEditMessage] = useState('');
-  const [assignment, setAssignment] = useState({ title: '', dueDate: '', secNo: section.secNo, courseId: section.courseId, secId: section.secId });
+  const [assignment, setAssignment] = useState({ title: '', dueDate: '' });
 
   const editOpen = () => {
-    setAssignment({ title: '', dueDate: '', secNo: section.secNo, courseId: section.courseId, secId: section.secId });
     setEditMessage('');
     setOpen(true);
+    setAssignment({ title: '', dueDate: '' });
   };
 
   const editClose = () => {
     setOpen(false);
-    setAssignment({ title: '', dueDate: '', secNo: section.secNo, courseId: section.courseId, secId: section.secId });
+    setAssignment({ title: '', dueDate: '' });
     setEditMessage('');
   };
 
@@ -34,38 +33,20 @@ const AssignmentAdd = (props)  => {
     setAssignment({ ...assignment, [event.target.name]: event.target.value });
   };
 
-  // Validate input 
   const onSave = () => {
     if (assignment.title === '') {
       setEditMessage("Title cannot be blank");
     } else if (assignment.dueDate === '') {
       setEditMessage("Due Date cannot be blank");
     } else {
-      addAssignment(assignment);
-    }
-  };
-
-
-  const addAssignment = async (assignment) => {
-    try {
-      const response = await fetch(`${SERVER_URL}/assignments`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(assignment)
-      });
-      if (response.ok) {
-        const rc = await response.json();
-        setEditMessage("Assignment added successfully");
-        editClose();
-        if (props.onClose) {
-          props.onClose();
-        }
-      } else {
-        const rc = await response.json();
-        setEditMessage(rc.message);
-      }
-    } catch (err) {
-      setEditMessage("Network error: " + err.message);
+      const completeAssignment = {
+        ...assignment,
+        secNo: props.section.secNo,
+        courseId: props.section.courseId,
+        secId: props.section.secId
+      };
+      props.save(completeAssignment);
+      editClose();
     }
   };
 
