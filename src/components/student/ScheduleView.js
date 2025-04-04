@@ -64,7 +64,8 @@ const ScheduleView = () => {
             <div style={styles.filters}>
                 <label>
                     Year:
-                    <select value={year} onChange={(e) => setYear(e.target.value)} style={styles.select}>
+                    <select id="year" value={year} onChange={(e) => setYear(e.target.value)} style={styles.select}>
+           
                         <option value="">-- Select Year --</option>
                         <option value="2024">2024</option>
                         <option value="2025">2025</option>
@@ -72,13 +73,13 @@ const ScheduleView = () => {
                 </label>
                 <label>
                     Semester:
-                    <select value={semester} onChange={(e) => setSemester(e.target.value)} style={styles.select}>
+                    <select id="semester" value={semester} onChange={(e) => setSemester(e.target.value)} style={styles.select}>
                         <option value="">-- Select Semester --</option>
                         <option value="Fall">Fall</option>
                         <option value="Spring">Spring</option>
                     </select>
                 </label>
-                <button onClick={fetchSchedule} style={styles.button}>Load Schedule</button>
+                <button id="load" onClick={fetchSchedule} style={styles.button}>Load Schedule</button>
             </div>
             {message && <p style={styles.message}>{message}</p>}
             <table style={styles.table}>
