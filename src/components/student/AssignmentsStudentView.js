@@ -66,6 +66,7 @@ const AssignmentsStudentView = (props) => {
                             <td>{a.assignmentId}</td>
                             <td>{a.title}</td>
                             <td>{a.dueDate}</td>
+                            <td>{a.score}</td>
                         </tr>
                     ))}
                     </tbody>
