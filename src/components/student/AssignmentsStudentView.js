@@ -14,7 +14,7 @@ const AssignmentsStudentView = (props) => {
     const [assignments, setAssignments] = useState([])
     const [message, setMessage] = useState('');
 
-    const headers = ['Assignment Id', 'Title', 'Due Date'];
+    const headers = ['Assignment Id', 'Title', 'Due Date', 'Score'];
     const onChange = (event) => {
         setTerm({...term, [event.target.name]:event.target.value});
     }
@@ -24,6 +24,7 @@ const AssignmentsStudentView = (props) => {
             const response = await fetch(`${SERVER_URL}/assignments?studentId=3&year=${term.year}&semester=${term.semester}`)
             if (response.ok) {
                 const data = await response.json();
+                console.log(data);
                 setAssignments(data)
             } else {
                 const rc = await response.json()
