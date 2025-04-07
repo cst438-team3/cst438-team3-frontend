@@ -14,7 +14,7 @@ const AssignmentsStudentView = (props) => {
     const [assignments, setAssignments] = useState([])
     const [message, setMessage] = useState('');
 
-    const headers = ['Assignment Id', 'Title', 'Due Date'];
+    const headers = ['Assignment Id', 'Title', 'Due Date', 'Score'];
     const onChange = (event) => {
         setTerm({...term, [event.target.name]:event.target.value});
     }
@@ -63,8 +63,8 @@ const AssignmentsStudentView = (props) => {
                     </thead>
                     <tbody>
                     {assignments.map((a) => (
-                        <tr key={a.id}>
-                            <td>{a.id}</td>
+                        <tr key={a.assignmentId}>
+                            <td>{a.assignmentId}</td>
                             <td>{a.title}</td>
                             <td>{a.dueDate}</td>
                             <td>{a.score}</td>
