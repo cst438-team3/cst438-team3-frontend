@@ -24,6 +24,7 @@ const AssignmentsStudentView = (props) => {
             const response = await fetch(`${SERVER_URL}/assignments?studentId=3&year=${term.year}&semester=${term.semester}`)
             if (response.ok) {
                 const data = await response.json();
+                console.log(data);
                 setAssignments(data)
             } else {
                 const rc = await response.json()
@@ -62,8 +63,8 @@ const AssignmentsStudentView = (props) => {
                     </thead>
                     <tbody>
                     {assignments.map((a) => (
-                        <tr key={a.assignmentId}>
-                            <td>{a.assignmentId}</td>
+                        <tr key={a.id}>
+                            <td>{a.id}</td>
                             <td>{a.title}</td>
                             <td>{a.dueDate}</td>
                             <td>{a.score}</td>
