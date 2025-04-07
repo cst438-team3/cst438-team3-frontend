@@ -65,6 +65,7 @@ const ScheduleView = () => {
                 <label>
                     Year:
                     <select id="year" value={year} onChange={(e) => setYear(e.target.value)} style={styles.select}>
+           
                         <option value="">-- Select Year --</option>
                         <option value="2024">2024</option>
                         <option value="2025">2025</option>
