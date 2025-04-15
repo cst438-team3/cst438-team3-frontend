@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { SERVER_URL } from '../../Constants';
+import { REGISTRAR_URL } from '../../Constants';
 
 // student can view schedule of sections 
 // use the URL /enrollments?studentId=3&year= &semester=
@@ -21,7 +21,7 @@ const ScheduleView = () => {
             return;
         }
         try {
-            const response = await fetch(`${SERVER_URL}/enrollments?studentId=3&year=${year}&semester=${semester}`);
+            const response = await fetch(`${REGISTRAR_URL}/enrollments?studentId=3&year=${year}&semester=${semester}`);
             if (response.ok) {
                 const data = await response.json();
                 setEnrollments(data);
@@ -37,7 +37,7 @@ const ScheduleView = () => {
 
     const dropEnrollment = async (enrollmentId) => {
         try {
-            const response = await fetch(`${SERVER_URL}/enrollments/${enrollmentId}`, {
+            const response = await fetch(`${REGISTRAR_URL}/enrollments/${enrollmentId}`, {
                 method: 'DELETE',
             });
             if (response.ok) {

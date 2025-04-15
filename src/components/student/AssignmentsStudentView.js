@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SERVER_URL} from "../../Constants";
+import {GRADEBOOK_URL} from "../../Constants";
 import Button from "@mui/material/Button";
 
 // student views a list of assignments and assignment grades 
@@ -21,7 +21,7 @@ const AssignmentsStudentView = (props) => {
 
     const fetchAssignments = async () => {
         try {
-            const response = await fetch(`${SERVER_URL}/assignments?studentId=3&year=${term.year}&semester=${term.semester}`)
+            const response = await fetch(`${GRADEBOOK_URL}/assignments?studentId=3&year=${term.year}&semester=${term.semester}`)
             if (response.ok) {
                 const data = await response.json();
                 console.log(data);

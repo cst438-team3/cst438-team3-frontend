@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useLocation } from "react-router-dom";
-import {SERVER_URL} from '../../Constants';
+import {GRADEBOOK_URL} from '../../Constants';
 import "../../App.css";
 
 // instructor views a list of sections they are teaching 
@@ -26,7 +26,7 @@ const InstructorSectionsView = (props) => {
 
     const fetchSections = async () => {
         try{
-            const response = await fetch(`${SERVER_URL}/sections?email=dwisneski@csumb.edu&year=${year}&semester=${semester}`)
+            const response = await fetch(`${GRADEBOOK_URL}/sections?email=dwisneski@csumb.edu&year=${year}&semester=${semester}`)
             
             if (response.ok) {
                 const data = await response.json();

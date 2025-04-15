@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import { SERVER_URL } from '../../Constants';
+import { REGISTRAR_URL } from '../../Constants';
+import { GRADEBOOK_URL } from '../../Constants';
 import AssignmentAdd from './AssignmentAdd';
 import AssignmentUpdate from './AssignmentUpdate';
 
@@ -16,7 +17,7 @@ const AssignmentsView = (props) => {
 
     const fetchAssignments = async () => {
         try {
-            const response = await fetch(`${SERVER_URL}/sections/${secNo}/assignments`);
+            const response = await fetch(`${GRADEBOOK_URL}/sections/${secNo}/assignments`);
             if (response.ok) {
                 const data = await response.json();
                 setAssignments(data);
@@ -35,7 +36,7 @@ const AssignmentsView = (props) => {
 
     const saveAssignment = async (assignment) => {
         try {
-            const response = await fetch(`${SERVER_URL}/assignments`, {
+            const response = await fetch(`${GRADEBOOK_URL}/assignments`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(assignment)
@@ -54,7 +55,7 @@ const AssignmentsView = (props) => {
 
     const addAssignment = async (assignment) => {
         try {
-            const response = await fetch(`${SERVER_URL}/assignments`, {
+            const response = await fetch(`${GRADEBOOK_URL}/assignments`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(assignment)
@@ -73,7 +74,7 @@ const AssignmentsView = (props) => {
 
     const deleteAssignment = async (assignmentId) => {
         try {
-            const response = await fetch(`${SERVER_URL}/assignments/${assignmentId}`, {
+            const response = await fetch(`${GRADEBOOK_URL}/assignments/${assignmentId}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
             });

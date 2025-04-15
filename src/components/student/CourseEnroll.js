@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { SERVER_URL } from '../../Constants';
+import { REGISTRAR_URL } from '../../Constants';
 
 // students displays a list of open sections for a 
 // use the URL /sections/open
@@ -15,7 +15,7 @@ const CourseEnroll = () => {
 
     const fetchSections = async () => {
         try {
-            const response = await fetch(`${SERVER_URL}/sections/open`);
+            const response = await fetch(`${REGISTRAR_URL}/sections/open`);
             if (response.ok) {
                 const data = await response.json();
                 setSections(data);
@@ -29,7 +29,7 @@ const CourseEnroll = () => {
     
     const enrollInSection = async (secNo) => {
         try {
-            const response = await fetch(`${SERVER_URL}/enrollments/sections/${secNo}?studentId=3`, {
+            const response = await fetch(`${REGISTRAR_URL}/enrollments/sections/${secNo}?studentId=3`, {
                 method: 'POST',
             });
             if (response.ok) {
