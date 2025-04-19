@@ -16,7 +16,13 @@ const AssignmentsView = (props) => {
 
     const fetchAssignments = async () => {
         try {
-            const response = await fetch(`${SERVER_URL}/sections/${secNo}/assignments`);
+            const jwt = sessionStorage.getItem('jwt')
+            const response = await fetch(`${SERVER_URL}/sections/${secNo}/assignments`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': jwt,
+                }
+            });
             if (response.ok) {
                 const data = await response.json();
                 setAssignments(data);
@@ -35,9 +41,10 @@ const AssignmentsView = (props) => {
 
     const saveAssignment = async (assignment) => {
         try {
+            const jwt = sessionStorage.getItem('jwt');
             const response = await fetch(`${SERVER_URL}/assignments`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': jwt },
                 body: JSON.stringify(assignment)
             });
             if (response.ok) {
@@ -54,9 +61,10 @@ const AssignmentsView = (props) => {
 
     const addAssignment = async (assignment) => {
         try {
+            const jwt = sessionStorage.getItem('jwt');
             const response = await fetch(`${SERVER_URL}/assignments`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': jwt },
                 body: JSON.stringify(assignment)
             });
             if (response.ok) {
@@ -73,9 +81,10 @@ const AssignmentsView = (props) => {
 
     const deleteAssignment = async (assignmentId) => {
         try {
+            const jwt = sessionStorage.getItem('jwt');
             const response = await fetch(`${SERVER_URL}/assignments/${assignmentId}`, {
                 method: 'DELETE',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': jwt },
             });
             if (response.ok) {
                 setMessage("Assignment deleted");

@@ -14,7 +14,13 @@ const Transcript = (props) => {
 
     const fetchTranscripts = async () => {
         try {
-            const response = await fetch(`${SERVER_URL}/transcripts?studentId=3`)
+            const jwt = sessionStorage.getItem('jwt');
+            const response = await fetch(`${SERVER_URL}/transcripts?studentId=3`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': jwt,
+                }
+            })
             if (response.ok) {
                 const data = await response.json();
                 setTranscripts(data);

@@ -15,7 +15,13 @@ const CourseEnroll = () => {
 
     const fetchSections = async () => {
         try {
-            const response = await fetch(`${SERVER_URL}/sections/open`);
+            const jwt = sessionStorage.getItem('jwt');
+            const response = await fetch(`${SERVER_URL}/sections/open`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': jwt,
+                }
+            });
             if (response.ok) {
                 const data = await response.json();
                 setSections(data);
@@ -29,8 +35,13 @@ const CourseEnroll = () => {
     
     const enrollInSection = async (secNo) => {
         try {
+            const jwt = sessionStorage.getItem('jwt');
             const response = await fetch(`${SERVER_URL}/enrollments/sections/${secNo}?studentId=3`, {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': jwt,
+                }
             });
             if (response.ok) {
                 setMessage(`Successfully enrolled in section ${secNo}`);

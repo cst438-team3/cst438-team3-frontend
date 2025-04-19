@@ -21,7 +21,13 @@ const ScheduleView = () => {
             return;
         }
         try {
-            const response = await fetch(`${SERVER_URL}/enrollments?studentId=3&year=${year}&semester=${semester}`);
+            const jwt = sessionStorage.getItem('jwt');
+            const response = await fetch(`${SERVER_URL}/enrollments?studentId=3&year=${year}&semester=${semester}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': jwt,
+                }
+            });
             if (response.ok) {
                 const data = await response.json();
                 setEnrollments(data);
@@ -37,8 +43,13 @@ const ScheduleView = () => {
 
     const dropEnrollment = async (enrollmentId) => {
         try {
+            const jwt = sessionStorage.getItem('jwt');
             const response = await fetch(`${SERVER_URL}/enrollments/${enrollmentId}`, {
                 method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': jwt,
+                }
             });
             if (response.ok) {
                 setMessage(`Successfully dropped enrollment ${enrollmentId}`);

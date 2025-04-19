@@ -21,7 +21,13 @@ const AssignmentsStudentView = (props) => {
 
     const fetchAssignments = async () => {
         try {
-            const response = await fetch(`${SERVER_URL}/assignments?studentId=3&year=${term.year}&semester=${term.semester}`)
+            const jwt = sessionStorage.getItem('jwt');
+            const response = await fetch(`${SERVER_URL}/assignments?studentId=3&year=${term.year}&semester=${term.semester}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': jwt,
+                }
+            })
             if (response.ok) {
                 const data = await response.json();
                 console.log(data);

@@ -20,7 +20,13 @@ function SectionsView(props) {
             setMessage("Enter search parameters");
         } else {
           try {
-            const response = await fetch(`${SERVER_URL}/courses/${search.courseId}/sections?year=${search.year}&semester=${search.semester}`);
+            const jwt = sessionStorage.getItem('jwt');
+            const response = await fetch(`${SERVER_URL}/courses/${search.courseId}/sections?year=${search.year}&semester=${search.semester}`, {
+              headers: {
+                'Authorization': jwt,
+                'Content-Type': 'application/json',
+              }
+            });
             if (response.ok) {
               const data = await response.json();
               setSections(data);
@@ -36,10 +42,12 @@ function SectionsView(props) {
 
     const deleteSection = async (secNo) => {
       try {
+        const jwt = sessionStorage.getItem('jwt');
         const response = await fetch (`${SERVER_URL}/sections/${secNo}`, 
         {
           method: 'DELETE',
           headers: {
+            'Authorization': jwt,
             'Content-Type': 'application/json',
           }, 
         });
