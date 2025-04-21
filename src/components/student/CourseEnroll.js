@@ -36,7 +36,7 @@ const CourseEnroll = () => {
     const enrollInSection = async (secNo) => {
         try {
             const jwt = sessionStorage.getItem('jwt');
-            const response = await fetch(`${SERVER_URL}/enrollments/sections/${secNo}?studentId=3`, {
+            const response = await fetch(`${SERVER_URL}/enrollments/sections/${secNo}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

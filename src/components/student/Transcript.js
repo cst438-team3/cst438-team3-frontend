@@ -15,7 +15,7 @@ const Transcript = (props) => {
     const fetchTranscripts = async () => {
         try {
             const jwt = sessionStorage.getItem('jwt');
-            const response = await fetch(`${SERVER_URL}/transcripts?studentId=3`, {
+            const response = await fetch(`${SERVER_URL}/transcripts`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': jwt,
@@ -24,6 +24,7 @@ const Transcript = (props) => {
             if (response.ok) {
                 const data = await response.json();
                 setTranscripts(data);
+                console.log(data);
             } else {
                 setMessage('Failed to load transcripts');
             }

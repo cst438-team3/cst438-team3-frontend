@@ -22,7 +22,7 @@ const ScheduleView = () => {
         }
         try {
             const jwt = sessionStorage.getItem('jwt');
-            const response = await fetch(`${SERVER_URL}/enrollments?studentId=3&year=${year}&semester=${semester}`, {
+            const response = await fetch(`${SERVER_URL}/enrollments?year=${year}&semester=${semester}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': jwt,
