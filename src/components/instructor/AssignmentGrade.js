@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import "../../App.css";
 import {SERVER_URL} from '../../Constants';
 import { Button } from '@mui/material';
+import { useParams } from 'react-router-dom';
+
 
 // instructor enters students' grades for an assignment
 // fetch the grades using the URL /assignments/{id}/grades
@@ -13,9 +14,8 @@ import { Button } from '@mui/material';
  
 
 const AssignmentGrade = (props) => {
-
-    const location = useLocation(); 
-    const {assignmentId} = location.state;
+    
+    const { assignmentId } = useParams();
 
     const [message, setMessage] = useState('');
     const [grades, setGrades] = useState([]);

@@ -16,6 +16,7 @@ const Login = (props) => {
           {
             method:'GET',
             headers: {'Content-Type':'application/json',
+                      'Accept':'application/json',
                       'Authorization': basicu }
           });
         if (response.ok) {
